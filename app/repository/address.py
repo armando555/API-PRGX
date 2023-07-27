@@ -40,8 +40,8 @@ def update(db: Session, request: AddressSchema, id: int):
     return f"Address {id} Updated"
 
 def bulk(db: Session, request: List[AddressSchema]):
-    for user in request:
-        new_user= Address(first_name=request.first_name, last_name=request.last_name, email=request.email, password=request.password)
-        db.add(new_user)
+    for address in request:
+        new_address= Address(address_1=address.address_1, address_2=address.address_2, city=address.city, state=address.state, country=address.country, zip=address.zip)
+        db.add(new_address)
     db.commit()
-    return "Bicycles created"
+    return "Addresses created"
