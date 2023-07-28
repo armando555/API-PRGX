@@ -9,6 +9,10 @@ or
 ```bash
 python3 -m venv venv
 ```
+## now activate the virtual environment
+```bash
+. venv/bin/activate
+```
 Go to the folder app and install the dependencies
 ```bash
 cd app && pip install -r requirements.txt
@@ -54,3 +58,6 @@ http://localhost:8001/docs
 
 ## sample of get user by country using a join between users and addresses tables through the ORM (SQLAlchemy)
 ![get](./docs/get_users.png)
+
+
+Thanks you for the opportunity
