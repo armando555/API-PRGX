@@ -56,7 +56,7 @@ def update(db: Session, request: UserSchema, id: int):
 def bulk(db: Session, request: List[UserSchema]):
     for user in request:
         addresses = []
-        for address_id in request.addresses:
+        for address_id in user.addresses:
             addresses.append(address_get_by_id(db=db, id=address_id))
         new_user = User(first_name=user.first_name, last_name=user.last_name, email=user.email, password=password_hash.hash_password(user.password), addresses=addresses)
         db.add(new_user)

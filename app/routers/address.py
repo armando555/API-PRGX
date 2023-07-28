@@ -21,7 +21,7 @@ async def all(db: Session = Depends(get_db_connection)):
 
 @router.get("/{id}", status_code=status.HTTP_200_OK, response_model=ShowAddressSchema)
 async def get(id, db: Session = Depends(get_db_connection)):
-    return address_repository.get(db, id)
+    return address_repository.get_by_id(db, id)
 
 @router.delete("/{id}",status_code=status.HTTP_204_NO_CONTENT)
 async def delete(id,db: Session = Depends(get_db_connection)):

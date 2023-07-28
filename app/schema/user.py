@@ -7,7 +7,7 @@ class UserBase(BaseModel):
     last_name: str = Field(...,max_length=50)
     email: str = Field(...,max_length=250)
     password: str = Field(...,max_length=256)
-    addresses: Optional[List[int]]
+    addresses: List[int] = []
     
 class UserSchema(UserBase):
     class Config():

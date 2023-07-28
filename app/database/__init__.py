@@ -1,1 +1,1 @@
-from .engine import SessionLocal
+from .engine import SessionLocal, engine
