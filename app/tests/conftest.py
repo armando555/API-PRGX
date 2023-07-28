@@ -14,7 +14,7 @@ def pytest_sessionstart(session):
 @pytest.fixture(scope="module")
 def db():
     EntityMeta.metadata.create_all(engine)
-    
+
     session = SessionLocal()
 
     yield session

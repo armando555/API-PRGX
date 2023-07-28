@@ -5,7 +5,15 @@ from repository.user import create as user_create
 
 class TestGetByIdUser:
     def test_get_by_id_user(self, db):
-        user_create(db=db,request=UserSchema(first_name="Jesus",last_name="Cristo",email="oli@asd.com",password="jesus123."))
+        user_create(
+            db=db,
+            request=UserSchema(
+                first_name="Jesus",
+                last_name="Cristo",
+                email="oli@asd.com",
+                password="jesus123.",
+            ),
+        )
         response = client.get(
             "/user/1",
         )

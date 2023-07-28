@@ -7,7 +7,6 @@ from sqladmin import Admin
 from views import *
 
 
-
 app = FastAPI(title=config.title)
 admin = Admin(app, engine)
 
@@ -22,5 +21,6 @@ app.include_router(address_router)
 async def read_main():
     return {"msg": "Hello World"}
 
-#Initialize Data Model
+
+# Initialize Data Model
 init()
