@@ -17,7 +17,7 @@ def create(request:AddressSchema, db: Session):
     db.refresh(new_address)
     return new_address
 
-def get(db: Session, id: int):
+def get_by_id(db: Session, id: int):
     address = db.query(Address).filter(Address.id == id).first()
     if not address:
         raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f'Address with the id {id} is not available')

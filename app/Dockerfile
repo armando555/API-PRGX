@@ -20,9 +20,7 @@ FROM python:3.8-slim
 WORKDIR /usr/src/app
 
 RUN apt-get update && \
-    apt-get install -yq --no-install-recommends tzdata git && \
-    ln -fs /usr/share/zoneinfo/America/Bogota /etc/localtime && \
-    dpkg-reconfigure -f noninteractive tzdata && \
+    apt-get install -yq --no-install-recommends git && \
     chown www-data:www-data -R /usr/src/app && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 

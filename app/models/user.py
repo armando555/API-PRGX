@@ -8,7 +8,7 @@ class User(Base):
     first_name = Column(String(50), nullable=False)
     last_name = Column(String(50), nullable=False)
     email = Column(String(250), nullable=False)
-    password = Column(String(16), nullable=False)
+    password = Column(String(256), nullable=False)
     addresses = relationship('Address', back_populates='user')
     
     
