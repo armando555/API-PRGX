@@ -9,6 +9,7 @@ class AddressBase(BaseModel):
     state: str
     zip: str
     country: str
+    user_id_fk: Optional[int]
     
 class AddressSchema(AddressBase):
     class Config():

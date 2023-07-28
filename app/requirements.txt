@@ -2,4 +2,5 @@ sqlalchemy
 fastapi
 uvicorn
 sqladmin
+itsdangerous
 passlib

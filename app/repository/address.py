@@ -11,7 +11,7 @@ def get_all(db: Session):
 
 
 def create(request:AddressSchema, db: Session):
-    new_address = Address(address_1=request.address_1, address_2=request.address_2, city=request.city, state=request.state, country=request.country, zip=request.zip)
+    new_address = Address(address_1=request.address_1, address_2=request.address_2, city=request.city, state=request.state, country=request.country, zip=request.zip, user_id_fk=request.user_id_fk)
     db.add(new_address)
     db.commit()
     db.refresh(new_address)
@@ -41,7 +41,7 @@ def update(db: Session, request: AddressSchema, id: int):
 
 def bulk(db: Session, request: List[AddressSchema]):
     for address in request:
-        new_address= Address(address_1=address.address_1, address_2=address.address_2, city=address.city, state=address.state, country=address.country, zip=address.zip)
+        new_address= Address(address_1=address.address_1, address_2=address.address_2, city=address.city, state=address.state, country=address.country, zip=address.zip, user_id_fk=address.user_id_fk)
         db.add(new_address)
     db.commit()
     return "Addresses created"

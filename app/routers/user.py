@@ -31,6 +31,6 @@ async def delete(id,db: Session = Depends(get_db_connection)):
 async def update(id, request: UserSchema, db: Session = Depends(get_db_connection)):
     return user_repository.update(db, request, id)
 
-@router.post("/bicycles", status_code=status.HTTP_200_OK)
+@router.post("/bulk", status_code=status.HTTP_200_OK)
 async def bulk(request: List[UserSchema], db: Session = Depends(get_db_connection)):
     return user_repository.bulk(db=db, request=request)

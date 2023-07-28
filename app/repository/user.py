@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 from models.user import User
+from models.address import Address
 from schema.user import UserSchema, ShowUserSchema
 from fastapi import status, HTTPException
 from typing import List
@@ -11,7 +12,10 @@ def get_all(db: Session):
 
 
 def create(request:UserSchema, db: Session):
-    new_user = User(first_name=request.first_name, last_name=request.last_name, email=request.email, password=request.password)
+    addresses = []
+    for address_id in request.addresses:
+        addresses.append(db.query(Address).filter(Address.id == address_id).first())
+    new_user = User(first_name=request.first_name, last_name=request.last_name, email=request.email, password=request.password, addresses=addresses)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
@@ -41,7 +45,10 @@ def update(db: Session, request: UserSchema, id: int):
 
 def bulk(db: Session, request: List[UserSchema]):
     for user in request:
-        new_user= User(first_name=user.first_name, last_name=user.last_name, email=user.email, password=user.password)
+        addresses = []
+        for address_id in user.addresses:
+            addresses.append(db.query(Address).filter(Address.id == address_id).first())
+        new_user= User(first_name=user.first_name, last_name=user.last_name, email=user.email, password=user.password, addresses=addresses)
         db.add(new_user)
     db.commit()
     return "Users created"

@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, status
 from typing import List
-from schema.user import ShowUserSchema,UserSchema
+from schema.address import ShowAddressSchema,AddressSchema
 from sqlalchemy.orm import Session
 from database.engine import get_db_connection
-from repository import  add as user_repository
+from repository import address as address_repository
 
 
 router = APIRouter(
@@ -12,25 +12,25 @@ router = APIRouter(
 )
 
 @router.post("/",status_code=status.HTTP_201_CREATED)
-async def create(request: UserSchema, db: Session = Depends(get_db_connection)):
-    return user_repository.create(request, db)
+async def create(request: AddressSchema, db: Session = Depends(get_db_connection)):
+    return address_repository.create(request, db)
 
-@router.get("/", status_code=status.HTTP_200_OK, response_model=List[ShowUserSchema])
+@router.get("/", status_code=status.HTTP_200_OK, response_model=List[ShowAddressSchema])
 async def all(db: Session = Depends(get_db_connection)):
-    return user_repository.get_all(db)
+    return address_repository.get_all(db)
 
-@router.get("/{id}", status_code=status.HTTP_200_OK, response_model=ShowUserSchema)
+@router.get("/{id}", status_code=status.HTTP_200_OK, response_model=ShowAddressSchema)
 async def get(id, db: Session = Depends(get_db_connection)):
-    return user_repository.get(db, id)
+    return address_repository.get(db, id)
 
 @router.delete("/{id}",status_code=status.HTTP_204_NO_CONTENT)
 async def delete(id,db: Session = Depends(get_db_connection)):
-    return user_repository.delete(db, id)
+    return address_repository.delete(db, id)
 
 @router.put("/{id}", status_code=status.HTTP_202_ACCEPTED)
-async def update(id, request: UserSchema, db: Session = Depends(get_db_connection)):
-    return user_repository.update(db, request, id)
+async def update(id, request: AddressSchema, db: Session = Depends(get_db_connection)):
+    return address_repository.update(db, request, id)
 
-@router.post("/bicycles", status_code=status.HTTP_200_OK)
-async def bulk(request: List[UserSchema], db: Session = Depends(get_db_connection)):
-    return user_repository.bulk(db=db, request=request)
+@router.post("/bulk", status_code=status.HTTP_200_OK)
+async def bulk(request: List[AddressSchema], db: Session = Depends(get_db_connection)):
+    return address_repository.bulk(db=db, request=request)
