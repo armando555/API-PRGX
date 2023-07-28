@@ -35,7 +35,7 @@ def update(db: Session, request: AddressSchema, id: int):
     address = db.query(Address).filter(Address.id == id)
     if not address.first():
         raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,detail=f'Address with the id {id} is not available')
-    address.update(request.model_dump())
+    address.update(request.dict())
     db.commit()
     return f"Address {id} Updated"
 
